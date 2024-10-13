@@ -7,7 +7,7 @@
 
 
 
-#define PACKET_SIZE 64
+#define PACKET_SIZE 128 
 
 unsigned short checksum(void *b, int len){
   unsigned short *buf = b;
@@ -25,10 +25,8 @@ unsigned short checksum(void *b, int len){
   return result;
 
 }
-
-
-
-int main(int argc, char *argv[]){
+  
+int main(int argc, char *argv[]){ 
   if (argc !=3 ){
     printf("Usage: %s <destination IP> <data>\n", argv[0]);
       return 1;
