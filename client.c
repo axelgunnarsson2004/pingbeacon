@@ -30,10 +30,41 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+<<<<<<< Updated upstream
     int sockfd;
     char packet[PACKET_SIZE];
     struct icmp *icmp_hdr;
     struct sockaddr_in dest_addr;
+=======
+int lol = 1;
+int main(int argc, char *argv[]){ 
+  if (argc !=3 ){
+    printf("Usage: %s <destination IP> <data>\n", argv[0]);
+      return 1;
+  }
+  int sockfd;
+  char packet[PACKET_SIZE];
+  struct icmp *icmp_hdr;
+  struct sockaddr_in dest_addr;
+  
+  sockfd = socket(AF_INET,SOCK_RAW,IPPROTO_ICMP);
+  if (sockfd<0){
+    perror("Socket Error");
+    return 1;
+  }
+  
+  memset(&dest_addr,0,sizeof(dest_addr));
+  dest_addr.sin_family = AF_INET;
+  dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  
+  memset(packet,0,PACKET_SIZE);
+  
+  icmp_hdr = (struct icmp *)packet;
+  icmp_hdr->icmp_type = ICMP_ECHO;
+  icmp_hdr->icmp_code = 0;
+  icmp_hdr->icmp_id = getpid();
+  icmp_hdr->icmp_seq = 0; 
+>>>>>>> Stashed changes
 
     // Create raw socket
     sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
